@@ -14,8 +14,6 @@ sourceSets {
     }
 }
 
-sourceSets.main.java.srcDirs += "${buildDir}/generated"
-
 repositories {
     mavenCentral()
 }

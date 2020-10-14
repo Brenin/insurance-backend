@@ -11,9 +11,6 @@ import javax.persistence.*;
 @Table(name = "person_address")
 public class AddressEntity extends BasicEntity {
 
-    @JoinColumn(name = "id_person", nullable = false, foreignKey = @ForeignKey(name = ForeignKeys.FK_ADDRESS_PERSON))
-    private PersonEntity person;
-
     @Column(name = "country_code", nullable = false)
     private String countryCode;
 

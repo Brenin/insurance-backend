@@ -3,7 +3,9 @@ package com.insurance.backend.service;
 import com.insurance.backend.dto.exceptions.CustomerNotFoundException;
 import com.insurance.backend.dto.internal.Person;
 import com.insurance.backend.dto.operations.NewCustomerRequest;
-import com.insurance.backend.repository.*;
+import com.insurance.backend.repository.AddressRepository;
+import com.insurance.backend.repository.CitizenshipRepository;
+import com.insurance.backend.repository.PersonRepository;
 import com.insurance.backend.repository.entity.AddressEntity;
 import com.insurance.backend.repository.entity.CitizenshipEntity;
 import com.insurance.backend.repository.entity.PersonEntity;
@@ -40,8 +42,8 @@ public class CreateNewCustomerService {
 
         CitizenshipEntity existingClient = citizenshipRepository.checkIfCustomerAlreadyExistsByPinAndCountry(person.getPin(), person.getCitizenshipCountryCode());
         if (existingClient != null) {
-            // Should never really throw an exception since we have a FK relationship
-            PersonEntity personEntity = personRepository.findById(existingClient.getPerson().getId())
+            // Should never really throw an exception since we have a FK NON NULL relationship
+            PersonEntity personEntity = personRepository.findByCitizenship(existingClient)
                     .orElseThrow(() -> new CustomerNotFoundException("Pin [" + existingClient.getPin() + "] belongs to an existing customer that could not be found"));
 
             return personEntity.getClientIdentification().toString();

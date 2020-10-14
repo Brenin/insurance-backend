@@ -33,6 +33,7 @@ public class CreateNewCustomerController {
             errorMessage = e.getMessage();
         }
 
-        return new ObjectMapper().writer().writeValueAsString(new NewCustomerResponse(customerNumber, errorMessage));
+        // Objects were read with null values in the gateway so I'll do it the basic way instead
+        return new ObjectMapper().writer().writeValueAsString(new NewCustomerResponse(errorMessage, customerNumber));
     }
 }

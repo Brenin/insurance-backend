@@ -11,9 +11,6 @@ import javax.persistence.*;
 @Table(name = "person_citizenship")
 public class CitizenshipEntity extends BasicEntity {
 
-    @JoinColumn(name = "id_person", foreignKey = @ForeignKey(name = ForeignKeys.FK_CITIZENSHIP_PERSON))
-    private PersonEntity person;
-
     @Column(name = "pin", nullable = false)
     private String pin;
 
